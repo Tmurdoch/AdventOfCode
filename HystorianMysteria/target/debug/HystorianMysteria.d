@@ -1,1 +1,1 @@
-/home/thomas/Projects/AdventOfCode/HystorianMysteria/target/debug/HystorianMysteria: /home/thomas/Projects/AdventOfCode/HystorianMysteria/src/main.rs
+C:\Users\kewl2\Projects\AdventOfCode\HystorianMysteria\target\debug\HystorianMysteria.exe: C:\Users\kewl2\Projects\AdventOfCode\HystorianMysteria\src\main.rs

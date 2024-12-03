@@ -9,23 +9,30 @@ fn main() {
 
     let mut count = 0;
     for s in contents.split_whitespace() {
-        if count % 2 == 0{ 
+        if count % 2 == 0 {
             left.push(s.trim().parse::<i32>().unwrap());
-        }
-        else {
+        } else {
             right.push(s.trim().parse::<i32>().unwrap());
         }
-        count+=1;
+        count += 1;
     }
-    let _=stdout().flush();
+    let _ = stdout().flush();
     left.sort();
     right.sort();
     let mut output = 0;
-    for i in &left {
-        for j in &right {
-            let n = i - j;
-            output += n.abs();
-        }
+    //for i in &left {
+    //    for j in &right {
+    //        let n = i - j;
+    //        println!("diff: {:?}", n);
+    //        output += n.abs();
+    //    }
+    //}
+    for it in left.iter().zip(right.iter_mut()) {
+        let (ai, bi) = it;
+        let n = *ai - *bi;
+        println!("diff: {:?}", n);
+
+        output += n.abs();
     }
 
     println!("Got sum: {:?}", output);
