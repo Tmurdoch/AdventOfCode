@@ -1,4 +1,19 @@
 use std::fs;
+use std::collections;
+use collections::BTreeMap;
+
+/// Count the number of occurrences of each value in an iterator
+pub fn get_counts<K: Ord, I: Iterator<K>>(mut iter: I) -> BTreeMap<K, i32> {
+    let mut counter: BTreeMap<K, i32> = BTreeMap::new();
+    for key in iter {
+        match counter.get(&key) {
+            Some(value) => { *value += 1; continue; }
+            None => {}
+        }
+        counter.insert(key, 1);
+    }
+    counter
+}
 
 fn main() {
     use std::io::{stdin, stdout, Write};
@@ -27,9 +42,9 @@ fn main() {
     //        output += n.abs();
     //    }
     //}
+
     for it in left.iter().zip(right.iter_mut()) {
         let (ai, bi) = it;
-        let n = *ai - *bi;
         println!("diff: {:?}", n);
 
         output += n.abs();
