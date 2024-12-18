@@ -1,8 +1,6 @@
 use std::fs;
 
 fn determine_safe(line: &str) -> i32 {
-    //TODO: write this, control flow makes no sense like it is below
-    //but copy some of it into here
     let mut increasing = -1;
     let mut last_number = -1;
     for number in line.split_whitespace() {
@@ -44,8 +42,24 @@ fn determine_safe(line: &str) -> i32 {
     return 1;
 }
 
+fn test_case(line: &str, expected: i32) {
+    if determine_safe(line) != expected {
+        panic!("expected {:?} to be {:?}", line, expected);
+    }
+}
+
 fn main() {
     //use std::io::{stdin, stdout, Write};
+    //TODO: pass some test cases into determine_safe so we can refactor and see where the problems
+    //are
+
+    test_case("7 6 4 2 1", 1);
+    test_case("1 2 7 8 9", 0);  
+    test_case("9 7 6 2 1", 0);
+    test_case("1 3 2 4 5", 1);
+    test_case("8 6 4 4 1", 1);
+    test_case("1 3 6 7 9", 1);
+
     let contents = fs::read_to_string("input.txt").expect("could not read file");
     let mut output = 0;
     for line in contents.lines() {
