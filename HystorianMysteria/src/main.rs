@@ -1,4 +1,6 @@
 use std::fs;
+use std::collections;
+
 
 /*
  * counts how many times num appears in nums
@@ -50,7 +52,7 @@ fn main() {
     //}
     for i in left.iter() {
         output += counts(right.clone(), *i);
-    }
 
+    }
     println!("Got sum: {:?}", output);
 }
