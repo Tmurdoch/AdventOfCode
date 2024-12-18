@@ -4,7 +4,11 @@ fn determine_safe(line: &str) -> i32 {
     let mut increasing = -1;
     let mut last_number = -1;
     let mut removed_one = false;
-    for number in line.split_whitespace() {
+    //TODO: use peekable, extract iterator out of the for loop declaration then finish failing if
+    //statement
+    let mut iter = line.split_whitespace().peekable();
+
+    for number in iter {
         let p_number = number.parse::<i32>().unwrap();
         if last_number == -1 {
             last_number = p_number;
@@ -44,6 +48,9 @@ fn determine_safe(line: &str) -> i32 {
                     } else {
                         //last_number = p_number;
                         removed_one = true;
+                        if c > 0 && p_number > iter.peek()  {
+                            increasing = 0;
+                        } 
                         continue;
                     }
                 }
@@ -56,6 +63,9 @@ fn determine_safe(line: &str) -> i32 {
                     } else {
                         //last_number = p_number;
                         removed_one = true;
+                        if c < 0 {
+                            increasing = 1;
+                        }
                         continue;
                     }
                 }
@@ -85,6 +95,7 @@ fn main() {
     test_case("8 6 4 4 1", 1);
     test_case("1 3 6 7 9", 1);
     test_case("55 55 55 53 51 48 46", 0);
+    test_case("5 6 4 3 2 1", 1);
 
     let contents = fs::read_to_string("input.txt").expect("could not read file");
     let mut output = 0;
