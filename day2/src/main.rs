@@ -8,7 +8,7 @@ fn determine_safe(line: &str) -> i32 {
     //statement
     let mut iter = line.split_whitespace().peekable();
 
-    for number in iter {
+    for number in &mut iter.next() {
         let p_number = number.parse::<i32>().unwrap();
         if last_number == -1 {
             last_number = p_number;
@@ -30,7 +30,6 @@ fn determine_safe(line: &str) -> i32 {
                 } else if c <= 0 && c >= -3 {
                     increasing = 1;
                 } else {
-                    println!("got zero in first comparison again?");
                     if removed_one {
                         return 0;
                     } else {
@@ -48,9 +47,23 @@ fn determine_safe(line: &str) -> i32 {
                     } else {
                         //last_number = p_number;
                         removed_one = true;
-                        if c > 0 && p_number > iter.peek()  {
-                            increasing = 0;
-                        } 
+                        let next = &iter.peek();
+                        match next {
+                            Some(next_number) => {
+                                if c > 0 && p_number > next_number.parse::<i32>().unwrap() {
+                                    println!("switching to decreasing");
+                                    increasing = 0;
+                                }
+                                if c < -3 {
+                                    println!("difference too high, not updating last_number");
+                                    continue; //don't update last number
+                                }
+                            }
+                            _ => {
+                                continue;
+                            }
+                        }
+
                         continue;
                     }
                 }
