@@ -8,7 +8,7 @@ fn determine_safe(line: &str) -> i32 {
     //statement
     let mut iter = line.split_whitespace().peekable();
 
-    for number in &mut iter.next() {
+    while let Some(number) = &mut iter.next() {
         let p_number = number.parse::<i32>().unwrap();
         if last_number == -1 {
             last_number = p_number;
@@ -51,20 +51,19 @@ fn determine_safe(line: &str) -> i32 {
                         match next {
                             Some(next_number) => {
                                 if c > 0 && p_number > next_number.parse::<i32>().unwrap() {
-                                    println!("switching to decreasing");
                                     increasing = 0;
                                 }
-                                if c < -3 {
-                                    println!("difference too high, not updating last_number");
+                                else if c < -3 {
                                     continue; //don't update last number
+                                }
+                                else {
+                                    return 0;   
                                 }
                             }
                             _ => {
                                 continue;
                             }
                         }
-
-                        continue;
                     }
                 }
             } else if increasing == 0 {
@@ -76,46 +75,73 @@ fn determine_safe(line: &str) -> i32 {
                     } else {
                         //last_number = p_number;
                         removed_one = true;
-                        if c < 0 {
-                            increasing = 1;
+                        let next = &iter.peek();
+                        match next {
+                            Some(next_number) => {
+                                if c < 0 && last_number > next_number.parse::<i32>().unwrap() {
+                                    increasing = 1;
+                                }
+                                else if c > 3 {
+                                    continue; //don't update last number
+                                }
+                                else {
+                                    return 0; //too many wrong
+                                }
+                            }
+                            _ => {
+                                continue;
+                            }
                         }
-                        continue;
                     }
                 }
             }
             last_number = p_number;
         }
     }
+    if removed_one {
+        println!("line: {:?} safe: {:?}", line, 1);
+    }
     return 1;
 }
 
 fn test_case(line: &str, expected: i32) {
-    if determine_safe(line) != expected {
-        panic!("expected {:?} to be {:?}", line, expected);
+    let ans = determine_safe(line);
+    if ans != expected {
+        panic!("expected {:?} to be {:?}, got: {:?}", line, expected, ans);
     }
 }
 
 fn main() {
     //use std::io::{stdin, stdout, Write};
-
+    test_case("5 4 3 4 5", 0);
+    test_case("41 39 36 38 40", 0);
+    test_case("5 7 4 3 2 1", 1);
+    test_case("79 82 78 76 74", 1);
+    test_case("74 76 78 82 79", 1);
+    test_case("9 7 6 2 1", 0);
     test_case("13 15 16 19 21 24 24", 1);
     test_case("7 6 4 2 1", 1);
     test_case("1 2 7 8 9", 0);
     test_case("2 1 3 4 5", 1); // need to check value before removed one and recalculate whether we
                                // are increasing or decreasing
-    test_case("9 7 6 2 1", 0);
+    test_case("5 4 3 1 2", 1);
     test_case("1 3 2 4 5", 1);
+    test_case("5 4 2 3 1", 1);
+    test_case("5 6 4", 1);
+    test_case("4 6 5", 1);
     test_case("8 6 4 4 1", 1);
     test_case("1 3 6 7 9", 1);
     test_case("55 55 55 53 51 48 46", 0);
     test_case("5 6 4 3 2 1", 1);
+    test_case("1 2 3 4 6 5", 1);
+    test_case("1 20 3 4 3 5", 0);
+    test_case("5 3 4 3 20 1", 0);
 
     let contents = fs::read_to_string("input.txt").expect("could not read file");
     let mut output = 0;
     for line in contents.lines() {
         //println!("line: {:?}", line);
         let fn_ret = determine_safe(line);
-        println!("line: {:?} safe: {:?}", line, fn_ret);
         output = output + fn_ret;
     }
     println!("total {:?}", output);
