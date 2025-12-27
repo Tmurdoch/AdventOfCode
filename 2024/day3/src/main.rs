@@ -14,15 +14,12 @@ fn parse_with_regex(line: &str) -> option::Option<Vec<&str>> {
 
 //see https://doc.rust-lang.org/book/ch04-03-slices.html
 fn extract_tuple_from_str(value: &str) -> Option<(i32, i32)> {
-    let trimmed_value = value.trim();
-    //let first_val: i32;
-    //let second_val: i32;
 
     let parts: Vec<&str> = value.split(',').filter(|s| !s.trim().is_empty()).collect();
     if parts.len() == 2 {
         let first = parts[0].trim().parse::<i32>().ok();
         let second = parts[1].trim().parse::<i32>().ok();
-        return Some((first, second));
+        return Some((first?, second?));
     } else {
         return None;
     }
@@ -39,7 +36,8 @@ fn extract_tuple_from_str(value: &str) -> Option<(i32, i32)> {
 }
 
 fn test_extraction(value: &str, expected: (i32, i32)) {
-    let val: (i32, i32) = extract_tuple_from_str(value);
+    let val: (i32, i32) = extract_tuple_from_str(value)
+        .expect("extract_tuple_from_str did not return Some");
     if val != expected {
         panic!("expected: {:?}, got {:?} ", expected, val);
     }
