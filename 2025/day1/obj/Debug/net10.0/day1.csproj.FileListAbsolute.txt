@@ -1,0 +1,15 @@
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\bin\Debug\net10.0\day1.exe
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\bin\Debug\net10.0\day1.deps.json
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\bin\Debug\net10.0\day1.runtimeconfig.json
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\bin\Debug\net10.0\day1.dll
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\bin\Debug\net10.0\day1.pdb
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.AssemblyInfoInputs.cache
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.AssemblyInfo.cs
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.csproj.CoreCompileInputs.cache
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.sourcelink.json
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.dll
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\refint\day1.dll
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.pdb
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\day1.genruntimeconfig.cache
+C:\Users\kewl2\Projects\AdventOfCode\2025\day1\obj\Debug\net10.0\ref\day1.dll
